@@ -1,10 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import Clock from './views/Clock.vue'
+import Login from './views/Login.vue'
+import Img from './views/Img.vue'
+import Add from './views/Add.vue'
+import threeDpicture from './Practical/threeDpicture.vue'
 
 Vue.use(Router)
 
 export default new Router({
+  linkActiveClass: 'active',
   routes: [
     {
       path: '/',
@@ -12,12 +18,41 @@ export default new Router({
       component: Home
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/clock',
+      name: 'clock',
+      component: Clock,
+      children:[
+        {
+          path: 'list',
+          name: 'list',
+          component:  () => import('./views/List.vue')
+        },
+        {
+          path: 'user',
+          name: 'user',
+          component:  () => import('./views/User.vue')
+        },
+      ]
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/add',
+      name: 'add',
+      component: Add
+    },
+    {
+      path: '/img',
+      name: 'img',
+      component: Img
+    },
+    {
+      path: '/threeDpicture',
+      name: 'threeDpicture',
+      component: threeDpicture
     }
   ]
 })
